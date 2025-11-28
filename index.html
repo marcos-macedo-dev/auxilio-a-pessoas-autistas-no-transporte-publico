@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projeto | Auxílio a Pessoas Autistas no Transporte Público</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #f6f2e9;
+      --ink: #1f1f1f;
+      --line: #d8d2c7;
+      --muted: #555;
+      --accent: #0f665c;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'IBM Plex Mono', 'Courier New', monospace;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.5;
+      letter-spacing: 0.01em;
+    }
+    a { color: inherit; }
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    header {
+      border: 1px solid var(--line);
+      padding: 18px;
+      background: #fbf9f5;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 26px;
+      letter-spacing: -0.02em;
+    }
+    header p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .link-line {
+      margin-top: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      background: #fff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .section {
+      border: 1px solid var(--line);
+      padding: 18px;
+      margin-top: 20px;
+      background: #fff;
+    }
+    .section h2 {
+      margin: 0 0 6px;
+      font-size: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .section p { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+    .cols {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .card {
+      border: 1px solid var(--line);
+      padding: 12px;
+      background: #faf8f4;
+      min-height: 120px;
+    }
+    .card h3 {
+      margin: 0 0 6px;
+      font-size: 15px;
+      letter-spacing: 0.02em;
+    }
+    .card p, .card ul {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .card ul { padding-left: 16px; }
+    .list {
+      margin: 6px 0 0;
+      padding-left: 16px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .footer {
+      margin-top: 24px;
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    @media (max-width: 600px) {
+      .page { padding: 20px 14px 32px; }
+      header, .section { padding: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <h1>Auxílio a Pessoas Autistas no Transporte Público</h1>
+      <p>Projeto Integrador · IoT e Cidades Inteligentes · UniFAP 2025</p>
+      <a class="link-line" href="doc_principal.pdf" target="_blank" rel="noopener">Abrir documento principal (PDF)</a>
+    </header>
+
+    <div class="section">
+      <h2>Enfoque</h2>
+      <p>Transporte público costuma ser caótico para pessoas no espectro. A proposta entrega previsibilidade em rotas de ônibus para reduzir sobrecarga sensorial.</p>
+      <ul class="list">
+        <li>Alinhado à ODS 11.2 (mobilidade acessível).</li>
+        <li>Uso mínimo de hardware para máximo impacto.</li>
+        <li>Informação clara e antecipada em pontos-chave do trajeto.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Componentes</h2>
+      <div class="cols">
+        <div class="card">
+          <h3>Ônibus</h3>
+          <p>ESP32/Arduino com LoRa e painel LED/LCD exibindo próxima parada, distância e tempo estimado.</p>
+        </div>
+        <div class="card">
+          <h3>Parada</h3>
+          <p>Gateway com LoRa + 4G que recebe dados dos ônibus e mostra lista de veículos, distâncias e tempos.</p>
+        </div>
+        <div class="card">
+          <h3>Servidor</h3>
+          <p>Node/Express com MQTT (HiveMQ) e Socket.IO; guarda telemetria em JSON/banco e distribui ao dashboard.</p>
+        </div>
+        <div class="card">
+          <h3>Dashboard</h3>
+          <p>Interface web para monitorar veículo, rota, próximas paradas e histórico recente.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Fluxo de dados</h2>
+      <div class="cols">
+        <div class="card">
+          <h3>Sequência</h3>
+          <ul>
+            <li>Ônibus → parada via LoRa.</li>
+            <li>Parada → servidor via 4G.</li>
+            <li>Servidor → displays e web via MQTT/Socket.IO.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Protocolo</h3>
+          <p>LoRa/LoRaWAN (classe C) para pacotes curtos; MQTT para telemetria; Socket.IO para tempo real na web.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Dados e persistência</h2>
+      <div class="cols">
+        <div class="card">
+          <h3>Campos principais</h3>
+          <p>Veículo (id, rota), parada atual, próxima parada, distância (km), tempo estimado (min), timestamp.</p>
+        </div>
+        <div class="card">
+          <h3>Histórico</h3>
+          <p>Eventos de mudança de parada guardados para consulta e exibição em tempo real.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Impacto</h2>
+      <div class="cols">
+        <div class="card">
+          <h3>Inclusão</h3>
+          <p>Antecipação reduz estresse sensorial e dá segurança a passageiros autistas.</p>
+        </div>
+        <div class="card">
+          <h3>Escala</h3>
+          <p>Componentes baratos e arquitetura simples favorecem expansão para várias linhas.</p>
+        </div>
+        <div class="card">
+          <h3>ODS</h3>
+          <p>Contribui para transporte urbano acessível, seguro e previsível.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      Projeto Integrador · Equipe 6 · 2025
+    </div>
+  </div>
+</body>
+</html>

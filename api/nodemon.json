@@ -1,0 +1,13 @@
+{
+  "verbose": true,
+  "ignore": [
+    "data/**",
+    "data/*.json",
+    "*.json" 
+  ],
+  "watch": [
+    "server.js",
+    ".env"
+  ],
+  "ext": "js"
+}

@@ -1,0 +1,46 @@
+[
+  {
+    "veiculo": {
+      "id": 101,
+      "rota": 7
+    },
+    "localizacao": {
+      "parada_atual": {
+        "id": 3,
+        "nome": "Mercado Munic."
+      },
+      "proxima_parada": {
+        "id": 4,
+        "nome": "EEMTI Carlota"
+      }
+    },
+    "estimativas": {
+      "distancia_km": 0,
+      "tempo_min": 0
+    },
+    "novo_evento": true,
+    "timestamp": "2025-11-28T17:15:48.313Z"
+  },
+  {
+    "veiculo": {
+      "id": 101,
+      "rota": 7
+    },
+    "localizacao": {
+      "parada_atual": {
+        "id": 2,
+        "nome": "Av. Araripe"
+      },
+      "proxima_parada": {
+        "id": 3,
+        "nome": "Mercado Munic."
+      }
+    },
+    "estimativas": {
+      "distancia_km": 2.3,
+      "tempo_min": 7
+    },
+    "novo_evento": true,
+    "timestamp": "2025-11-28T17:15:45.174Z"
+  }
+]
